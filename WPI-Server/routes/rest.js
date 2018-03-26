@@ -2,24 +2,24 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const problemService = require('../service/productService');
+const productService = require('../service/productService');
 const bookService = require('../service/bookService');
 const houseService = require('../service/houseService');
 
 // deal with household item
 router.get('/products', (req, res) => {
-    problemService.getProducts()
-        .then((problems) => res.json(problems)); // return all product with json format, res is the return value
+    productService.getProducts()
+        .then((products) => res.json(products)); // return all product with json format, res is the return value
 });
 router.get('/products/:id', (req, res) => {
     var id = req.params['id'];
     console.log(id);
-    problemService.getProduct(id)
-        .then((problem) => res.json(problem));
+    productService.getProduct(id)
+        .then((product) => res.json(product));
 });
 router.post('/products', jsonParser, (req, res) => {
-    problemService.addProduct(req.body)
-        .then((newProblem) => res.json(newProblem));
+    productService.addProduct(req.body)
+        .then((newProduct) => res.json(newProduct));
 });
 //deal with book section
 router.get('/books', (req, res) => {
@@ -60,4 +60,13 @@ router.post('/houses', jsonParser, (req, res) => {
             console.log(e);
         });
 })
+
+
+//deal with user events
+//router.get('/register',(req,res)=>{
+    
+});
+
+
+
 module.exports = router;
